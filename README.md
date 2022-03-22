@@ -1,10 +1,5 @@
-# Docker Plex & Usenet Media Server
-
-docker-based plex & usenet media server using custom subdomains over https
-
 ## Motivation
 
-- host each service as a subdomain of a personal domain with letsencrypt
 - run public maintained images with no modifications
 - require minimal configuration and setup
 
@@ -19,7 +14,7 @@ docker-based plex & usenet media server using custom subdomains over https
 - [Ombi](https://ombi.io/) is a self-hosted web application that automatically gives your shared Plex or Emby users the ability to request content by themselves.
 - [Netdata](https://www.netdata.cloud/) - Troubleshoot slowdowns and anomalies in your infrastructure with thousands of metrics, interactive visualizations, and insightful health alarms.
 - [Duplicati](https://www.duplicati.com/) - Free backup software to store encrypted backups online.
-- [Traefik](https://traefik.io/) is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy.
+
 
 ## Requirements
 
@@ -29,15 +24,7 @@ docker-based plex & usenet media server using custom subdomains over https
 
 ## Direct Configuration
 
-Copy `env.sample` to `.env` and populate all fields in the `COMMON` section.
-
-Make sure to leave `ACME_EMAIL` blank for direct configuration.
-
-## Secure Configuration
-
-Copy `env.sample` to `.env` and populate all fields in the `COMMON` and `SECURE` sections.
-
-Make sure to set `ACME_EMAIL` for secure configuration.
+Copy `env.sample` to `.env` and populate all fields.
 
 ## Deployment
 
@@ -52,55 +39,6 @@ make deploy
 There are currently two methods of authentication enabled, and I recommend using them
 both if the secure configuration is in use. If it's not exposed to the Internet you can
 remove one or both of these middlewares from `docker-compose.secure.yml`.
-
-### ipallowlist
-
-This is our first layer of security, and probably the most important.
-
-If you are using mediaserver locally and are not exposing any ports to the Internet, you can skip
-this section or set `IPALLOWLIST=0.0.0.0/0,::/0` in your `.env` file.
-
-To avoid unauthorized users from even seeing our login pages, we should set the `IPALLOWLIST` to
-only IP ranges that we want to explictly allow access.
-
-Access from any other IP will result in "403 Forbidden" giving you some peice of mind!
-
-This functionality can be enabled/disabled per service in `docker-compose.secure.yml`
-with the `ipallowlist` middleware.
-
-By default Plex, Jellyfin, Ombi, and NZBHydra2 will allow all traffic.
-
-### basicauth
-
-This functionality can be enabled/disabled per service in `docker-compose.secure.yml`
-with the `basicauth` middleware.
-
-Users can be added to basic auth in 2 ways. If both methods are used they are merged and the
-htpasswd file takes priority.
-
-1. Add users in your `.env` file with the `BASICAUTH_USERS` variable.
-
-2. Add users via htpasswd file in the traefik service.
-
-The first user added requires `htpasswd -c` in order to create the password file.
-Subsequent users should only use `htpasswd` to avoid overwriting the file.
-
-```bash
-docker-compose exec traefik apk add --no-cache apache2-utils
-docker-compose exec traefik htpasswd -c /etc/traefik/.htpasswd <user1>
-docker-compose exec traefik htpasswd /etc/traefik/.htpasswd <user2>
-```
-
-By default only Duplicati and Netdata have basic http auth enabled.
-
-For the remaining services I suggest enabling the built-in authentication via the app.
-This avoids the need to add manual exceptions for API access where required and simplifies our proxy rules.
-
-For Sonarr, Radarr, Prowlar you can enable authentication under Settings->General->Security.
-
-For Nzbget the default credentials are `nzbget:tegbzn6789` and can be changed under Settings->Security.
-
-For NZBHydra2 you can add users under Config->Authorization.  
 
 ## Author
 
