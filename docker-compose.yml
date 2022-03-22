@@ -1,0 +1,208 @@
+version: "3.7"
+networks:
+  npm_proxy_network:
+services:
+  # https://docs.linuxserver.io/images/docker-plex
+  plex:
+    image: linuxserver/plex:1.25.7
+    restart: unless-stopped
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+      PLEX_CLAIM: "${PLEX_CLAIM}"
+    networks:
+      - npm_proxy_network
+    volumes:
+      - "${CONFIG_DIR}/plex:/config"
+      - "${MEDIA_DIR}:/media"
+    tmpfs:
+      - "/tmp"
+  # https://docs.linuxserver.io/images/docker-jellyfin
+  jellyfin:
+    image: linuxserver/jellyfin:10.7.7
+    restart: unless-stopped
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+      JELLYFIN_PublishedServerUrl: "${JELLYFIN_HOST}"
+    networks:
+      - npm_proxy_network
+    volumes:
+      - "${CONFIG_DIR}/jellyfin:/config"
+      - "${MEDIA_DIR}:/media"
+  # https://hub.docker.com/r/linuxserver/prowlarr
+  prowlarr:
+    image: linuxserver/prowlarr:0.2.0-develop
+    restart: unless-stopped
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+    networks:
+      - npm_proxy_network
+    volumes:
+      - "${CONFIG_DIR}/prowlarr:/config"
+  # https://docs.linuxserver.io/images/docker-nzbget
+  nzbget:
+    image: linuxserver/nzbget:21.1.20220317
+    restart: unless-stopped
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+    networks:
+      - npm_proxy_network
+    volumes:
+      - "${CONFIG_DIR}/nzbget:/config"
+      - "${DOWNLOADS_DIR}:/downloads"
+  # https://docs.linuxserver.io/images/docker-sonarr
+  sonarr:
+    image: linuxserver/sonarr:3.0.7
+    restart: unless-stopped
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+    networks:
+      - npm_proxy_network
+    volumes:
+      - "${CONFIG_DIR}/sonarr:/config"
+      - "${DOWNLOADS_DIR}:/downloads"
+      - "${MEDIA_DIR}:/media"
+    links:
+      - nzbhydra
+      - nzbget
+      - transmission
+  # https://docs.linuxserver.io/images/docker-radarr
+  radarr:
+    image: linuxserver/radarr:4.0.5
+    restart: unless-stopped
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+    networks:
+      - npm_proxy_network
+    volumes:
+      - "${CONFIG_DIR}/radarr:/config"
+      - "${DOWNLOADS_DIR}:/downloads"
+      - "${MEDIA_DIR}:/media"
+    links:
+      - nzbhydra
+      - nzbget
+      - transmission
+  # https://docs.linuxserver.io/images/docker-nzbhydra
+  nzbhydra:
+    image: linuxserver/nzbhydra2:4.2.0
+    restart: unless-stopped
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+    networks:
+      - npm_proxy_network
+    volumes:
+      - "${CONFIG_DIR}/nzbhydra:/config"
+      - "${DOWNLOADS_DIR}:/downloads"
+  # https://docs.linuxserver.io/images/docker-ombi
+  ombi:
+    image: linuxserver/ombi:4.10.2
+    restart: unless-stopped
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+    volumes:
+      - ${CONFIG_DIR}/ombi:/config
+    networks:
+      - npm_proxy_network
+    links:
+      - sonarr
+      - radarr
+      - plex
+  # https://docs.linuxserver.io/images/docker-duplicati
+  duplicati:
+    image: linuxserver/duplicati:2.0.6
+    restart: unless-stopped
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+    volumes:
+      - ${CONFIG_DIR}/duplicati:/config:rw
+      - ./:/source:rw
+    networks:
+      - npm_proxy_network
+  # https://hub.docker.com/r/netdata/netdata
+  netdata:
+    image: netdata/netdata:v1.33.1
+    restart: unless-stopped
+    hostname: ${NETDATA_HOST}
+    environment:
+      PGID: ${DOCKER_PGID}
+      TZ: ${TZ}
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - /etc/passwd:/host/etc/passwd:ro
+      - /etc/group:/host/etc/group:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - npm_proxy_network
+  # https://hub.docker.com/r/linuxserver/transmission    
+  transmission:
+    image: lscr.io/linuxserver/transmission
+    restart: unless-stopped
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+    volumes:
+      - ${CONFIG_DIR}/transmission:/config
+      - ${DOWNLOADS_DIR}:/downloads
+      - ${DOWNLOADS_DIR}/jackett:/watch
+    networks:
+      - npm_proxy_network
+  # https://hub.docker.com/r/linuxserver/bazarr
+  bazarr:
+    image: lscr.io/linuxserver/bazarr
+    restart: unless-stopped
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+    volumes:
+      - "${CONFIG_DIR}/bazarr:/config"
+      - "${MEDIA_DIR}/Movies:/movies"
+      - "${MEDIA_DIR}/TV:/tv"
+    networks:
+      - npm_proxy_network
+  # https://hub.docker.com/r/linuxserver/lidarr
+  lidarr:
+    image: lscr.io/linuxserver/lidarr
+    restart: unless-stopped
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+    volumes:
+      - "${CONFIG_DIR}/lidarr:/config"
+      - "${MEDIA_DIR}/Music:/music"
+      - "${DOWNLOADS_DIR}:/downloads"
+    networks:
+      - npm_proxy_network
+  # https://hub.docker.com/r/jc21/nginx-proxy-manager
+  npm:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    volumes:
+      - "${CONFIG_DIR}/npm:/data"
+      - "${CONFIG_DIR}/npm/letsencrypt:/etc/letsencrypt"
+    networks:
+      - npm_proxy_network

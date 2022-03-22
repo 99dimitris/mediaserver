@@ -1,0 +1,63 @@
+version: "3.7"
+
+services:
+  # plex:
+  #   ports:
+  #     - "32400:32400/tcp"
+  
+  # jellyfin:
+  #   ports:
+  #     - "8096:8096/tcp"
+  #     - "7359:7359/udp"
+
+  # nzbget:
+  #   ports:
+  #     - "6789:6789/tcp"
+
+  # sonarr:
+  #   ports:
+  #     - "8989:8989/tcp"
+
+  # radarr:
+  #   ports:
+  #     - "7878:7878/tcp"
+
+  # nzbhydra:
+  #   ports:
+  #     - "5076:5076/tcp"
+
+  # ombi:
+  #   ports:
+  #     - "3579:3579/tcp"
+
+  # duplicati:
+  #   ports:
+  #     - "8200:8200/tcp"
+
+  # netdata:
+  #   ports:
+  #     - "19999:19999/tcp"
+
+  # prowlarr:
+  #   ports:
+  #     - "9696:9696/tcp"
+
+  # bazarr:
+  #   ports:
+  #     - "6767:6767/tcp"
+
+  # lidarr:
+  #   ports:
+  #     - "8686:8686/tcp"
+
+  # transmission:
+  #   ports:
+  #     - 9091:9091
+  #     - 51413:51413
+  #     - 51413:51413/udp
+
+  npm:
+    ports:
+      - '80:80/tcp'
+      - '8181:81/tcp'
+      - '443:443/tcp'
