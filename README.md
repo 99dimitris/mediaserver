@@ -104,9 +104,9 @@ For NZBHydra2 you can add users under Config->Authorization.
 
 ## Author
 
-Kyle Harding <https://klutchell.dev>
+Dimitris Matsoukas <https://github.com/99dimitris>
 
-[Buy me a beer](https://buymeacoffee.com/klutchell)
+[Buy me a beer](https://www.buymeacoffee.com/dmatsoukas)
 
 ## Acknowledgments
 
