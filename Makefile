@@ -6,7 +6,6 @@ SHELL = /bin/bash -e
 COMMON_FILE := docker-compose.yml
 OVERRIDE_FILE := docker-compose.override.yml
 DIRECT_FILE := docker-compose.direct.yml
-SECURE_FILE := docker-compose.secure.yml
 
 #ifneq ($(ACME_EMAIL),)
 #export COMPOSE_FILE := $(COMMON_FILE):$(SECURE_FILE)
