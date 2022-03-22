@@ -34,11 +34,6 @@ Pull and deploy containers with docker-compose.
 make deploy
 ```
 
-## Authorization
-
-There are currently two methods of authentication enabled, and I recommend using them
-both if the secure configuration is in use. If it's not exposed to the Internet you can
-remove one or both of these middlewares from `docker-compose.secure.yml`.
 
 ## Author
 
@@ -60,4 +55,7 @@ maintainers, and the original software creators.
 - <https://hub.docker.com/r/linuxserver/ombi>
 - <https://hub.docker.com/r/linuxserver/duplicati/>
 - <https://hub.docker.com/r/netdata/netdata/>
-- <https://hub.docker.com/_/traefik/>
+- <https://hub.docker.com/r/linuxserver/transmission>
+- <https://hub.docker.com/r/linuxserver/bazarr>
+- <https://hub.docker.com/r/linuxserver/lidarr>
+- <https://hub.docker.com/r/jc21/nginx-proxy-manager>
