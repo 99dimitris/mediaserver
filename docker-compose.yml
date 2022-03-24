@@ -133,6 +133,8 @@ services:
     volumes:
       - ${CONFIG_DIR}/duplicati:/config:rw
       - ./:/source:rw
+      - ${BACKUP_DIR}:/backupdir:rw
+      - ${CONFIG_DIR}:/allconf:ro
     networks:
       - npm_proxy_network
   # https://hub.docker.com/r/netdata/netdata
@@ -201,6 +203,10 @@ services:
   npm:
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
     volumes:
       - "${CONFIG_DIR}/npm:/data"
       - "${CONFIG_DIR}/npm/letsencrypt:/etc/letsencrypt"
