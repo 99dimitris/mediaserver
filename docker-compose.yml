@@ -212,3 +212,19 @@ services:
       - "${CONFIG_DIR}/npm/letsencrypt:/etc/letsencrypt"
     networks:
       - npm_proxy_network
+
+  navidrome:
+    image: deluan/navidrome:latest
+    restart: unless-stopped
+    user: ${PUID}:${PGID}
+    environment:
+      TZ: ${TZ}
+      ND_SCANSCHEDULE: "@every 1m"
+      ND_LOGLEVEL: debug  
+      ND_SESSIONTIMEOUT: 24h
+      ND_BASEURL: ""
+    volumes:
+      - "${CONFIG_DIR}/navidrome:/data"
+      - "${MEDIA_DIR}/Music:/music:ro"
+    networks:
+      - npm_proxy_network

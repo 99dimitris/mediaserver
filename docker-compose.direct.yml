@@ -56,6 +56,10 @@ services:
   #     - 51413:51413
   #     - 51413:51413/udp
 
+  #navidrome:
+  #  ports:
+  #    - "4533:4533"
+  
   npm:
     ports:
       - '80:80/tcp'
