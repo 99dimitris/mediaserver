@@ -31,6 +31,12 @@
 
 Copy `env.sample` to `.env` and populate all fields.
 
+To add a non-existent shell user:
+
+```bash
+sudo useradd -r -s /bin/false USERNAME
+```
+
 ## Deployment
 
 Pull and deploy containers with docker-compose.
