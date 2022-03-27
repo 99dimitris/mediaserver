@@ -183,6 +183,7 @@ services:
       - "${CONFIG_DIR}/bazarr:/config"
       - "${MEDIA_DIR}/Movies:/movies"
       - "${MEDIA_DIR}/TV:/tv"
+      - "${MEDIA_DIR}/Series:/series"
     networks:
       - npm_proxy_network
   # https://hub.docker.com/r/linuxserver/lidarr
