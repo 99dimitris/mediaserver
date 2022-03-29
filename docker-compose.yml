@@ -4,7 +4,7 @@ networks:
 services:
   # https://docs.linuxserver.io/images/docker-plex
   plex:
-    image: linuxserver/plex:1.25.7
+    image: linuxserver/plex:latest
     restart: unless-stopped
     environment:
       PUID: "${PUID}"
@@ -20,7 +20,7 @@ services:
       - "/tmp"
   # https://docs.linuxserver.io/images/docker-jellyfin
   jellyfin:
-    image: linuxserver/jellyfin:10.7.7
+    image: linuxserver/jellyfin:latest
     restart: unless-stopped
     environment:
       PUID: "${PUID}"
@@ -46,7 +46,7 @@ services:
       - "${CONFIG_DIR}/prowlarr:/config"
   # https://docs.linuxserver.io/images/docker-nzbget
   nzbget:
-    image: linuxserver/nzbget:21.1.20220317
+    image: linuxserver/nzbget:latest
     restart: unless-stopped
     environment:
       PUID: "${PUID}"
@@ -59,7 +59,7 @@ services:
       - "${DOWNLOADS_DIR}:/downloads"
   # https://docs.linuxserver.io/images/docker-sonarr
   sonarr:
-    image: linuxserver/sonarr:3.0.7
+    image: linuxserver/sonarr:latest
     restart: unless-stopped
     environment:
       PUID: "${PUID}"
@@ -77,7 +77,7 @@ services:
       - transmission
   # https://docs.linuxserver.io/images/docker-radarr
   radarr:
-    image: linuxserver/radarr:4.0.5
+    image: linuxserver/radarr:latest
     restart: unless-stopped
     environment:
       PUID: "${PUID}"
@@ -95,7 +95,7 @@ services:
       - transmission
   # https://docs.linuxserver.io/images/docker-nzbhydra
   nzbhydra:
-    image: linuxserver/nzbhydra2:4.2.0
+    image: linuxserver/nzbhydra2:latest
     restart: unless-stopped
     environment:
       PUID: "${PUID}"
@@ -108,7 +108,7 @@ services:
       - "${DOWNLOADS_DIR}:/downloads"
   # https://docs.linuxserver.io/images/docker-ombi
   ombi:
-    image: linuxserver/ombi:4.10.2
+    image: linuxserver/ombi:latest
     restart: unless-stopped
     environment:
       PUID: ${PUID}
@@ -124,7 +124,7 @@ services:
       - plex
   # https://docs.linuxserver.io/images/docker-duplicati
   duplicati:
-    image: linuxserver/duplicati:2.0.6
+    image: linuxserver/duplicati:latest
     restart: unless-stopped
     environment:
       PUID: ${PUID}
@@ -139,7 +139,7 @@ services:
       - npm_proxy_network
   # https://hub.docker.com/r/netdata/netdata
   netdata:
-    image: netdata/netdata:v1.33.1
+    image: netdata/netdata:latest
     restart: unless-stopped
     hostname: ${NETDATA_HOST}
     environment:
@@ -159,7 +159,7 @@ services:
       - npm_proxy_network
   # https://hub.docker.com/r/linuxserver/transmission    
   transmission:
-    image: lscr.io/linuxserver/transmission
+    image: lscr.io/linuxserver/transmission:latest
     restart: unless-stopped
     environment:
       PUID: "${PUID}"
@@ -173,7 +173,7 @@ services:
       - npm_proxy_network
   # https://hub.docker.com/r/linuxserver/bazarr
   bazarr:
-    image: lscr.io/linuxserver/bazarr
+    image: lscr.io/linuxserver/bazarr:latest
     restart: unless-stopped
     environment:
       PUID: "${PUID}"
@@ -188,7 +188,7 @@ services:
       - npm_proxy_network
   # https://hub.docker.com/r/linuxserver/lidarr
   lidarr:
-    image: lscr.io/linuxserver/lidarr
+    image: lscr.io/linuxserver/lidarr:latest
     restart: unless-stopped
     environment:
       PUID: "${PUID}"

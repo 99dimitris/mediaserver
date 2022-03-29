@@ -60,6 +60,10 @@ services:
   #  ports:
   #    - "4533:4533"
   
+  # homer:
+  #   ports:
+  #     - 8087:8080
+  
   npm:
     ports:
       - '80:80/tcp'
