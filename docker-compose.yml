@@ -202,7 +202,7 @@ services:
       - npm_proxy_network
   # https://hub.docker.com/r/jc21/nginx-proxy-manager
   npm:
-    image: 'jc21/nginx-proxy-manager:latest'
+    image: jc21/nginx-proxy-manager:latest
     restart: unless-stopped
     environment:
       PUID: ${PUID}
@@ -213,7 +213,7 @@ services:
       - "${CONFIG_DIR}/npm/letsencrypt:/etc/letsencrypt"
     networks:
       - npm_proxy_network
-
+  # https://hub.docker.com/r/deluan/navidrome
   navidrome:
     image: deluan/navidrome:latest
     restart: unless-stopped
@@ -227,5 +227,17 @@ services:
     volumes:
       - "${CONFIG_DIR}/navidrome:/data"
       - "${MEDIA_DIR}/Music:/music:ro"
+    networks:
+      - npm_proxy_network
+  # https://hub.docker.com/r/b4bz/homer
+  homer:
+    image: b4bz/homer:latest
+    restart: unless-stopped
+    volumes:
+      - "${CONFIG_DIR}/homer/assets/:/www/assets"
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
     networks:
       - npm_proxy_network
