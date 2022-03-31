@@ -64,6 +64,10 @@ services:
   #   ports:
   #     - 8087:8080
   
+  # overseerr:
+  #   ports:
+  #     - 5055:5055
+
   npm:
     ports:
       - '80:80/tcp'

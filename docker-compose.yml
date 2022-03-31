@@ -213,6 +213,10 @@ services:
       - "${CONFIG_DIR}/npm/letsencrypt:/etc/letsencrypt"
     networks:
       - npm_proxy_network
+    healthcheck:
+      test: ["CMD", "/bin/check-health"]
+      interval: 10s
+      timeout: 3s
   # https://hub.docker.com/r/deluan/navidrome
   navidrome:
     image: deluan/navidrome:latest
@@ -239,5 +243,18 @@ services:
       PUID: ${PUID}
       PGID: ${PGID}
       TZ: ${TZ}
+    networks:
+      - npm_proxy_network
+  # https://hub.docker.com/r/sctx/overseerr
+  overseerr:
+    image: sctx/overseerr:latest
+    restart: unless-stopped
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+      LOG_LEVEL: debug
+    volumes:
+      - "${CONFIG_DIR}/overseerr:/app/config"
     networks:
       - npm_proxy_network
