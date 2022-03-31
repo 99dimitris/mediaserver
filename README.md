@@ -21,6 +21,7 @@
 - [NPM](https://nginxproxymanager.com/) - is a reverse proxy management system based on an Nginx server and provides users with a clean, efficient, and beautiful web interface for easier management.
 - [Navidrome](https://www.navidrome.org/) - allows you to enjoy your music collection from anywhere, by making it available through a modern Web UI and through a wide range of third-party compatible mobile apps, for both iOS and Android devices.
 - [Homer](https://github.com/bastienwirtz/homer/) - a dead simple static Hompage for your server to keep your services on hand, from a simple yaml configuration file.
+- [Overseerr](https://docs.overseerr.dev/) - is a free and open source software application for managing requests for your media library. It integrates with your existing services, such as Sonarr, Radarr, and Plex!
 
 ## Requirements
 
@@ -74,3 +75,4 @@ maintainers, and the original software creators.
 - <https://hub.docker.com/r/jc21/nginx-proxy-manager>
 - <https://hub.docker.com/r/deluan/navidrome>
 - <https://hub.docker.com/r/b4bz/homer>
+- <https://hub.docker.com/r/sctx/overseerr>
