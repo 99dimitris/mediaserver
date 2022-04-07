@@ -106,22 +106,6 @@ services:
     volumes:
       - "${CONFIG_DIR}/nzbhydra:/config"
       - "${DOWNLOADS_DIR}:/downloads"
-  # https://docs.linuxserver.io/images/docker-ombi
-  ombi:
-    image: linuxserver/ombi:latest
-    restart: unless-stopped
-    environment:
-      PUID: ${PUID}
-      PGID: ${PGID}
-      TZ: ${TZ}
-    volumes:
-      - ${CONFIG_DIR}/ombi:/config
-    networks:
-      - npm_proxy_network
-    links:
-      - sonarr
-      - radarr
-      - plex
   # https://docs.linuxserver.io/images/docker-duplicati
   duplicati:
     image: linuxserver/duplicati:latest
