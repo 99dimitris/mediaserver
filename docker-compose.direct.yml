@@ -26,10 +26,6 @@ services:
   #   ports:
   #     - "5076:5076/tcp"
 
-  # ombi:
-  #   ports:
-  #     - "3579:3579/tcp"
-
   # duplicati:
   #   ports:
   #     - "8200:8200/tcp"
