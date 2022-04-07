@@ -7,7 +7,7 @@
 
 - [Plex](https://plex.tv/) - organizes video, music and photos from personal media libraries and streams them to smart TVs, streaming boxes and mobile devices.
 - [Jellyfin](https://jellyfin.org/) - is the volunteer-built media solution that puts you in control of your media.
-- [Ombi](https://ombi.io/) - is a self-hosted web application that automatically gives your shared Plex or Emby users the ability to request content by themselves.
+- [Overseerr](https://docs.overseerr.dev/) - is a free and open source software application for managing requests for your media library. It integrates with your existing services, such as Sonarr, Radarr, and Plex!
 - [Sonarr](https://sonarr.tv/) - is a PVR for usenet and bittorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.
 - [Radarr](https://radarr.video/) - A fork of Sonarr to work with movies à la Couchpotato.
 - [Bazarr](https://www.bazarr.media/) - is a companion application to Sonarr and Radarr that manages and downloads subtitles based on your requirements.
@@ -21,7 +21,6 @@
 - [NPM](https://nginxproxymanager.com/) - is a reverse proxy management system based on an Nginx server and provides users with a clean, efficient, and beautiful web interface for easier management.
 - [Navidrome](https://www.navidrome.org/) - allows you to enjoy your music collection from anywhere, by making it available through a modern Web UI and through a wide range of third-party compatible mobile apps, for both iOS and Android devices.
 - [Homer](https://github.com/bastienwirtz/homer/) - a dead simple static Hompage for your server to keep your services on hand, from a simple yaml configuration file.
-- [Overseerr](https://docs.overseerr.dev/) - is a free and open source software application for managing requests for your media library. It integrates with your existing services, such as Sonarr, Radarr, and Plex!
 
 ## Requirements
 
