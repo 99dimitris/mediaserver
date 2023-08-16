@@ -12,16 +12,18 @@
 - [Radarr](https://radarr.video/) - A fork of Sonarr to work with movies à la Couchpotato.
 - [Bazarr](https://www.bazarr.media/) - is a companion application to Sonarr and Radarr that manages and downloads subtitles based on your requirements.
 - [Lidarr](https://lidarr.audio/) - is a music collection manager for Usenet and BitTorrent users.
-- [NZBHydra2](https://github.com/theotherp/nzbhydra2) - is a meta search application for NZB indexers, the "spiritual successor" to NZBmegasearcH, and an evolution of the original application NZBHydra.
 - [Prowlarr](https://github.com/Prowlarr/Prowlarr) - is a indexer manager/proxy built on the popular arr .net/reactjs base stack to integrate with your various PVR apps.
-- [Duplicati](https://www.duplicati.com/) - Free backup software to store encrypted backups online.
-- [Netdata](https://www.netdata.cloud/) - Troubleshoot slowdowns and anomalies in your infrastructure with thousands of metrics, interactive visualizations, and insightful health alarms.
-- [Transmission](https://transmissionbt.com/) - is a feature-packed torrent client offering almost every function a torrent user will need.
+- [Qbittorrent](https://www.qbittorrent.org/) - aims to provide an open-source software alternative to µTorrent. qBittorrent is based on the Qt toolkit and libtorrent-rasterbar library.
+- [JDownloader 2](http://jdownloader.org/) - a free, open-source download management tool with a huge community of developers that makes downloading as easy and fast as it should be.
 - [NZBGet](https://nzbget.net/) - is a usenet downloader, written in C++ and designed with performance in mind to achieve maximum download speed by using very little system resources.
-- [NPM](https://nginxproxymanager.com/) - is a reverse proxy management system based on an Nginx server and provides users with a clean, efficient, and beautiful web interface for easier management.
+- [NZBHydra2](https://github.com/theotherp/nzbhydra2) - is a meta search application for NZB indexers, the "spiritual successor" to NZBmegasearcH, and an evolution of the original application NZBHydra.
 - [Navidrome](https://www.navidrome.org/) - allows you to enjoy your music collection from anywhere, by making it available through a modern Web UI and through a wide range of third-party compatible mobile apps, for both iOS and Android devices.
-- [Homer](https://github.com/bastienwirtz/homer/) - a dead simple static Hompage for your server to keep your services on hand, from a simple yaml configuration file.
-
+- [Homer](https://github.com/ajnart/homarr) - a sleek, modern dashboard that puts all of your apps and services at your fingertips.
+- [Tautulli](http://tautulli.com/) - a python based web application for monitoring, analytics and notifications for Plex Media Server.
+- [Netdata](https://www.netdata.cloud/) - Troubleshoot slowdowns and anomalies in your infrastructure with thousands of metrics, interactive visualizations, and insightful health alarms.
+- [NPM](https://nginxproxymanager.com/) - is a reverse proxy management system based on an Nginx server and provides users with a clean, efficient, and beautiful web interface for easier management.
+- [Filebrowser](https://github.com/hurlenko/filebrowser-docker) - a file managing interface within a specified directory and it can be used to upload, delete, preview, rename and edit your files.
+- [Duplicati](https://www.duplicati.com/) - Free backup software to store encrypted backups online.
 ## Requirements
 
 - dedicated server or PC with plenty of storage
