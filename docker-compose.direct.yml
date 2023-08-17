@@ -64,8 +64,19 @@ services:
   #   ports:
   #     - 5055:5055
 
-  npm:
-    ports:
-      - '80:80/tcp'
-      - '8181:81/tcp'
-      - '443:443/tcp'
+  # npm:
+  #   ports:
+  #     - '80:80/tcp'
+  #     - '8181:81/tcp'
+  #     - '443:443/tcp'
+
+  # qbittorent:
+  #   ports:
+  #     - 8080:8080
+  #     - 6881:6881
+  #     - 6881:6881/udp
+
+  # homarr:
+  #   ports:
+  #     - '7575:7575'
+

@@ -6,6 +6,7 @@ services:
   plex:
     image: linuxserver/plex:latest
     restart: unless-stopped
+    container_name: plex
     environment:
       PUID: "${PUID}"
       PGID: "${PGID}"
@@ -22,6 +23,7 @@ services:
   jellyfin:
     image: linuxserver/jellyfin:latest
     restart: unless-stopped
+    container_name: jellyfin
     environment:
       PUID: "${PUID}"
       PGID: "${PGID}"
@@ -32,35 +34,25 @@ services:
     volumes:
       - "${CONFIG_DIR}/jellyfin:/config"
       - "${MEDIA_DIR}:/media"
-  # https://hub.docker.com/r/linuxserver/prowlarr
-  prowlarr:
-    image: linuxserver/prowlarr:0.2.0-develop
+  # https://hub.docker.com/r/sctx/overseerr
+  overseerr:
+    image: sctx/overseerr:latest
     restart: unless-stopped
+    container_name: overseerr
     environment:
-      PUID: "${PUID}"
-      PGID: "${PGID}"
-      TZ: "${TZ}"
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+      LOG_LEVEL: debug
+    volumes:
+      - "${CONFIG_DIR}/overseerr:/app/config"
     networks:
       - npm_proxy_network
-    volumes:
-      - "${CONFIG_DIR}/prowlarr:/config"
-  # https://docs.linuxserver.io/images/docker-nzbget
-  nzbget:
-    image: linuxserver/nzbget:latest
-    restart: unless-stopped
-    environment:
-      PUID: "${PUID}"
-      PGID: "${PGID}"
-      TZ: "${TZ}"
-    networks:
-      - npm_proxy_network
-    volumes:
-      - "${CONFIG_DIR}/nzbget:/config"
-      - "${DOWNLOADS_DIR}:/downloads"
   # https://docs.linuxserver.io/images/docker-sonarr
   sonarr:
     image: linuxserver/sonarr:latest
     restart: unless-stopped
+    container_name: sonarr
     environment:
       PUID: "${PUID}"
       PGID: "${PGID}"
@@ -74,11 +66,12 @@ services:
     links:
       - nzbhydra
       - nzbget
-      - transmission
+      - qbittorrent
   # https://docs.linuxserver.io/images/docker-radarr
   radarr:
     image: linuxserver/radarr:latest
     restart: unless-stopped
+    container_name: radarr
     environment:
       PUID: "${PUID}"
       PGID: "${PGID}"
@@ -92,7 +85,98 @@ services:
     links:
       - nzbhydra
       - nzbget
-      - transmission
+      - qbittorrent
+  # https://hub.docker.com/r/linuxserver/bazarr
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    restart: unless-stopped
+    container_name: bazarr
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+    volumes:
+      - "${CONFIG_DIR}/bazarr:/config"
+      - "${MEDIA_DIR}/Movies:/movies"
+      - "${MEDIA_DIR}/TV:/tv"
+      - "${MEDIA_DIR}/Series:/series"
+    networks:
+      - npm_proxy_network
+  # https://hub.docker.com/r/linuxserver/lidarr
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    restart: unless-stopped
+    container_name: lidarr
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+    volumes:
+      - "${CONFIG_DIR}/lidarr:/config"
+      - "${MEDIA_DIR}/Music:/music"
+      - "${DOWNLOADS_DIR}:/downloads"
+    networks:
+      - npm_proxy_network
+    links:
+      - nzbhydra
+      - nzbget
+      - qbittorrent
+  # https://hub.docker.com/r/linuxserver/prowlarr
+  prowlarr:
+    image: linuxserver/prowlarr:0.2.0-develop
+    restart: unless-stopped
+    container_name: prowlarr
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+    networks:
+      - npm_proxy_network
+    volumes:
+      - "${CONFIG_DIR}/prowlarr:/config"
+  # https://hub.docker.com/r/linuxserver/qbittorrent
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    restart: unless-stopped
+    container_name: qbittorrent
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+      WEBUI_PORT: "8080"
+    networks:
+      - npm_proxy_network
+    volumes:
+      - "${CONFIG_DIR}/qbittorent:/config"
+      - "${DOWNLOADS_DIR}:/downloads"
+  https://github.com/ajnart/homarr/pkgs/container/homarr    
+  homarr:
+    container_name: homarr
+    image: ghcr.io/ajnart/homarr:latest
+    restart: unless-stopped
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+    networks:
+      - npm_proxy_network
+    volumes:
+      - "${CONFIG_DIR}/homarr/configs:/app/data/configs"
+      - "${CONFIG_DIR}/homarr/public/icons:/app/public/icons"
+  # https://docs.linuxserver.io/images/docker-nzbget
+  nzbget:
+    image: linuxserver/nzbget:latest
+    restart: unless-stopped
+    container_name: nzbget
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+    networks:
+      - npm_proxy_network
+    volumes:
+      - "${CONFIG_DIR}/nzbget:/config"
+      - "${DOWNLOADS_DIR}:/downloads"
   # https://docs.linuxserver.io/images/docker-nzbhydra
   nzbhydra:
     image: linuxserver/nzbhydra2:latest
@@ -141,49 +225,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       - npm_proxy_network
-  # https://hub.docker.com/r/linuxserver/transmission    
-  transmission:
-    image: lscr.io/linuxserver/transmission:latest
-    restart: unless-stopped
-    environment:
-      PUID: "${PUID}"
-      PGID: "${PGID}"
-      TZ: "${TZ}"
-    volumes:
-      - ${CONFIG_DIR}/transmission:/config
-      - ${DOWNLOADS_DIR}:/downloads
-      - ${DOWNLOADS_DIR}/jackett:/watch
-    networks:
-      - npm_proxy_network
-  # https://hub.docker.com/r/linuxserver/bazarr
-  bazarr:
-    image: lscr.io/linuxserver/bazarr:latest
-    restart: unless-stopped
-    environment:
-      PUID: "${PUID}"
-      PGID: "${PGID}"
-      TZ: "${TZ}"
-    volumes:
-      - "${CONFIG_DIR}/bazarr:/config"
-      - "${MEDIA_DIR}/Movies:/movies"
-      - "${MEDIA_DIR}/TV:/tv"
-      - "${MEDIA_DIR}/Series:/series"
-    networks:
-      - npm_proxy_network
-  # https://hub.docker.com/r/linuxserver/lidarr
-  lidarr:
-    image: lscr.io/linuxserver/lidarr:latest
-    restart: unless-stopped
-    environment:
-      PUID: "${PUID}"
-      PGID: "${PGID}"
-      TZ: "${TZ}"
-    volumes:
-      - "${CONFIG_DIR}/lidarr:/config"
-      - "${MEDIA_DIR}/Music:/music"
-      - "${DOWNLOADS_DIR}:/downloads"
-    networks:
-      - npm_proxy_network
   # https://hub.docker.com/r/jc21/nginx-proxy-manager
   npm:
     image: jc21/nginx-proxy-manager:latest
@@ -227,18 +268,5 @@ services:
       PUID: ${PUID}
       PGID: ${PGID}
       TZ: ${TZ}
-    networks:
-      - npm_proxy_network
-  # https://hub.docker.com/r/sctx/overseerr
-  overseerr:
-    image: sctx/overseerr:latest
-    restart: unless-stopped
-    environment:
-      PUID: ${PUID}
-      PGID: ${PGID}
-      TZ: ${TZ}
-      LOG_LEVEL: debug
-    volumes:
-      - "${CONFIG_DIR}/overseerr:/app/config"
     networks:
       - npm_proxy_network
