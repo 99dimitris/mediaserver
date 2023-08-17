@@ -18,7 +18,7 @@
 - [NZBGet](https://nzbget.net/) - is a usenet downloader, written in C++ and designed with performance in mind to achieve maximum download speed by using very little system resources.
 - [NZBHydra2](https://github.com/theotherp/nzbhydra2) - is a meta search application for NZB indexers, the "spiritual successor" to NZBmegasearcH, and an evolution of the original application NZBHydra.
 - [Navidrome](https://www.navidrome.org/) - allows you to enjoy your music collection from anywhere, by making it available through a modern Web UI and through a wide range of third-party compatible mobile apps, for both iOS and Android devices.
-- [Homer](https://github.com/ajnart/homarr) - a sleek, modern dashboard that puts all of your apps and services at your fingertips.
+- [Homarr](https://github.com/ajnart/homarr) - a sleek, modern dashboard that puts all of your apps and services at your fingertips.
 - [Tautulli](http://tautulli.com/) - a python based web application for monitoring, analytics and notifications for Plex Media Server.
 - [Netdata](https://www.netdata.cloud/) - Troubleshoot slowdowns and anomalies in your infrastructure with thousands of metrics, interactive visualizations, and insightful health alarms.
 - [NPM](https://nginxproxymanager.com/) - is a reverse proxy management system based on an Nginx server and provides users with a clean, efficient, and beautiful web interface for easier management.
@@ -60,20 +60,24 @@ Dimitris Matsoukas <https://github.com/99dimitris>
 I didn't create any of these docker images myself, so credit goes to the
 maintainers, and the original software creators.
 
-- <https://hub.docker.com/r/linuxserver/plex/>
+- <https://hub.docker.com/r/linuxserver/plex>
 - <https://hub.docker.com/r/linuxserver/jellyfin>
-- <https://hub.docker.com/r/linuxserver/sonarr/>
-- <https://hub.docker.com/r/linuxserver/radarr/>
+- <https://hub.docker.com/r/sctx/overseerr>
+- <https://hub.docker.com/r/linuxserver/sonarr>
+- <https://hub.docker.com/r/linuxserver/radarr>
 - <https://hub.docker.com/r/linuxserver/bazarr>
 - <https://hub.docker.com/r/linuxserver/lidarr>
-- <https://hub.docker.com/r/linuxserver/prowlarr/>
-- <https://hub.docker.com/r/linuxserver/nzbhydra2/>
-- <https://hub.docker.com/r/linuxserver/ombi>
-- <https://hub.docker.com/r/linuxserver/duplicati/>
-- <https://hub.docker.com/r/netdata/netdata/>
-- <https://hub.docker.com/r/linuxserver/transmission>
-- <https://hub.docker.com/r/linuxserver/nzbget/>
-- <https://hub.docker.com/r/jc21/nginx-proxy-manager>
+- <https://hub.docker.com/r/linuxserver/prowlarr>
+- <https://hub.docker.com/r/linuxserver/qbittorrent>
+- <https://hub.docker.com/r/jlesage/jdownloader-2>
+- <https://hub.docker.com/r/linuxserver/nzbhydra2>
+- <https://hub.docker.com/r/linuxserver/nzbget>
 - <https://hub.docker.com/r/deluan/navidrome>
-- <https://hub.docker.com/r/b4bz/homer>
-- <https://hub.docker.com/r/sctx/overseerr>
+- <https://github.com/ajnart/homarr/pkgs/container/homarr>
+- <https://hub.docker.com/r/linuxserver/tautulli>
+- <https://hub.docker.com/r/netdata/netdata>
+- <https://hub.docker.com/r/jc21/nginx-proxy-manager>
+- <https://hub.docker.com/r/filebrowser/filebrowser>
+- <https://hub.docker.com/r/linuxserver/duplicati>
+
+
