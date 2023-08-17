@@ -149,7 +149,7 @@ services:
     volumes:
       - "${CONFIG_DIR}/qbittorent:/config"
       - "${DOWNLOADS_DIR}:/downloads"
-  https://github.com/ajnart/homarr/pkgs/container/homarr    
+  # https://github.com/ajnart/homarr/pkgs/container/homarr    
   homarr:
     container_name: homarr
     image: ghcr.io/ajnart/homarr:latest
