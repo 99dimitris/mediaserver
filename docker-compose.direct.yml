@@ -71,7 +71,7 @@ services:
   npm:
     ports:
       - '80:80/tcp'
-      - '8181:81/tcp'
+      - '81:81/tcp'
       - '443:443/tcp'
 
   filebrowser:
