@@ -164,7 +164,7 @@ services:
       - "5800:5800"
     volumes:
       - "${CONFIG_DIR}/jdownloader-2:/config:rw"
-      - "${DOWNLOADS_DIR}jd2:/output:rw"
+      - "${DOWNLOADS_DIR}/jd2:/output:rw"
   # https://docs.linuxserver.io/images/docker-nzbget
   nzbget:
     image: linuxserver/nzbget:latest
