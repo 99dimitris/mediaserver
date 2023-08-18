@@ -279,15 +279,15 @@ services:
   # https://hub.docker.com/r/filebrowser/filebrowser
   filebrowser:
     restart: unless-stopped
-    image: filebrowser/filebrowser:s6
+    image: hurlenko/filebrowser
     container_name: filebrowser
+    user: ${PUID}:${PGID}
     environment:
-      PUID: ${PUID}
-      PGID: ${PGID}
+      FB_BASEURL: /
       TZ: ${TZ}
     volumes:
-      - "${MEDIA_DIR}/:/mediastack:rw"
-      - "${CONFIG_DIR}/filebrowser/settings.json:/config/settings.json"
+      - "${MEDIA_DIR}/:/data"
+      - "${CONFIG_DIR}/filebrowser:/config"
     networks:
       - npm_proxy_network
   # https://docs.linuxserver.io/images/docker-duplicati
