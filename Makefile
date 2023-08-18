@@ -7,11 +7,8 @@ COMMON_FILE := docker-compose.yml
 OVERRIDE_FILE := docker-compose.override.yml
 DIRECT_FILE := docker-compose.direct.yml
 
-#ifneq ($(ACME_EMAIL),)
-#export COMPOSE_FILE := $(COMMON_FILE):$(SECURE_FILE)
-#else
 export COMPOSE_FILE := $(COMMON_FILE):$(DIRECT_FILE)
-#endif
+
 
 config: ## Write environment configuration to console
 	docker compose config
