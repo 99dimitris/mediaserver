@@ -34,7 +34,7 @@ services:
     ports:
       - "9696:9696/tcp"
 
-  qbittorent:
+  qbittorrent:
     ports:
       - 8080:8080
       - 6881:6881
