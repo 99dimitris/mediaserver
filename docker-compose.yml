@@ -16,7 +16,7 @@ services:
       - npm_proxy_network
     volumes:
       - "${CONFIG_DIR}/plex:/config"
-      - "${MEDIA_DIR}:/media"
+      - "${MEDIA_DIR}/:/media"
     tmpfs:
       - "/tmp"
   # https://docs.linuxserver.io/images/docker-jellyfin
@@ -33,7 +33,7 @@ services:
       - npm_proxy_network
     volumes:
       - "${CONFIG_DIR}/jellyfin:/config"
-      - "${MEDIA_DIR}:/media"
+      - "${MEDIA_DIR}/:/media"
   # https://hub.docker.com/r/sctx/overseerr
   overseerr:
     image: sctx/overseerr:latest
@@ -61,8 +61,8 @@ services:
       - npm_proxy_network
     volumes:
       - "${CONFIG_DIR}/sonarr:/config"
-      - "${DOWNLOADS_DIR}:/downloads"
-      - "${MEDIA_DIR}:/media"
+      - "${DOWNLOADS_DIR}/:/downloads"
+      - "${MEDIA_DIR}/:/media"
     # links:
     #   - nzbhydra
     #   - nzbget
@@ -80,8 +80,8 @@ services:
       - npm_proxy_network
     volumes:
       - "${CONFIG_DIR}/radarr:/config"
-      - "${DOWNLOADS_DIR}:/downloads"
-      - "${MEDIA_DIR}:/media"
+      - "${DOWNLOADS_DIR}/:/downloads"
+      - "${MEDIA_DIR}/:/media"
     # links:
     #   - nzbhydra
     #   - nzbget
@@ -114,7 +114,7 @@ services:
     volumes:
       - "${CONFIG_DIR}/lidarr:/config"
       - "${MEDIA_DIR}/Music:/music"
-      - "${DOWNLOADS_DIR}:/downloads"
+      - "${DOWNLOADS_DIR}/:/downloads"
     networks:
       - npm_proxy_network
     # links:
@@ -148,7 +148,7 @@ services:
       - npm_proxy_network
     volumes:
       - "${CONFIG_DIR}/qbittorent:/config"
-      - "${DOWNLOADS_DIR}:/downloads"
+      - "${DOWNLOADS_DIR}/:/downloads"
   # https://hub.docker.com/r/jlesage/jdownloader-2
   jdownloader-2:
     image: jlesage/jdownloader-2
@@ -164,7 +164,7 @@ services:
       - "5800:5800"
     volumes:
       - "${CONFIG_DIR}/jdownloader-2:/config:rw"
-      - "${DOWNLOADS_DIR}/jd2:/output:rw"
+      - "${DOWNLOADS_DIR}jd2:/output:rw"
   # https://docs.linuxserver.io/images/docker-nzbget
   nzbget:
     image: linuxserver/nzbget:latest
@@ -178,7 +178,7 @@ services:
       - npm_proxy_network
     volumes:
       - "${CONFIG_DIR}/nzbget:/config"
-      - "${DOWNLOADS_DIR}:/downloads"
+      - "${DOWNLOADS_DIR}/:/downloads"
   # https://docs.linuxserver.io/images/docker-nzbhydra
   nzbhydra:
     image: linuxserver/nzbhydra2:latest
@@ -192,7 +192,7 @@ services:
       - npm_proxy_network
     volumes:
       - "${CONFIG_DIR}/nzbhydra:/config"
-      - "${DOWNLOADS_DIR}:/downloads"
+      - "${DOWNLOADS_DIR}/:/downloads"
   # https://github.com/ajnart/homarr/pkgs/container/homarr    
   homarr:
     image: ghcr.io/ajnart/homarr:latest
@@ -302,8 +302,8 @@ services:
     volumes:
       - ${CONFIG_DIR}/duplicati:/config:rw
       - ./:/source:rw
-      - ${BACKUP_DIR}:/backupdir:rw
-      - ${CONFIG_DIR}:/allconf:ro
+      - ${BACKUP_DIR}/:/backupdir:rw
+      - ${CONFIG_DIR}/:/allconf:ro
     networks:
       - npm_proxy_network
   
