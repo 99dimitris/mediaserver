@@ -76,7 +76,7 @@ services:
 
   filebrowser:
     ports:
-      - 8182:80
+      - 8182:8080
 
   duplicati:
     ports:
