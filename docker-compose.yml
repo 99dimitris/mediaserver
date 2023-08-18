@@ -286,7 +286,7 @@ services:
       PGID: ${PGID}
       TZ: ${TZ}
     volumes:
-      - "${MEDIA_DIR}:/mediastack:rw"
+      - "${MEDIA_DIR}/:/mediastack:rw"
       - "${CONFIG_DIR}/filebrowser/settings.json:/config/settings.json"
     networks:
       - npm_proxy_network
