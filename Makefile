@@ -14,21 +14,21 @@ export COMPOSE_FILE := $(COMMON_FILE):$(DIRECT_FILE)
 #endif
 
 config: ## Write environment configuration to console
-	docker-compose config
+	docker compose config
 
 pull: ## Pull latest container images
-	docker-compose pull
+	docker compose pull
 
 up: ## Create all networks, containers, and volumes
-	docker-compose config > $(OVERRIDE_FILE)
-	unset COMPOSE_FILE ; docker-compose up --detach --remove-orphans
+	docker compose config > $(OVERRIDE_FILE)
+	unset COMPOSE_FILE ; docker compose up --detach --remove-orphans
 
 deploy: up ## Alias for 'up'
 
 pull-up: pull up ## Alias for 'pull & up'
 
 down: ## Remove all networks, containers, and images
-	docker-compose down --remove-orphans --rmi all
+	docker compose down --remove-orphans --rmi all
 
 clean: ## Remove local override file
 	-rm $(OVERRIDE_FILE)
