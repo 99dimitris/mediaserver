@@ -77,7 +77,7 @@ maintainers, and the original software creators.
 - <https://hub.docker.com/r/linuxserver/tautulli>
 - <https://hub.docker.com/r/netdata/netdata>
 - <https://hub.docker.com/r/jc21/nginx-proxy-manager>
-- <https://hub.docker.com/r/filebrowser/filebrowser>
+- <https://hub.docker.com/r/hurlenko/filebrowser>
 - <https://hub.docker.com/r/linuxserver/duplicati>
 
 

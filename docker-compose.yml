@@ -276,7 +276,7 @@ services:
       test: ["CMD", "/bin/check-health"]
       interval: 10s
       timeout: 3s
-  # https://hub.docker.com/r/filebrowser/filebrowser
+  # https://hub.docker.com/r/hurlenko/filebrowser
   filebrowser:
     restart: unless-stopped
     image: hurlenko/filebrowser
