@@ -51,7 +51,7 @@ make deploy
 
 ## Author
 
-Dimitris Matsoukas <https://github.com/99dimitris>
+[Dimitris Matsoukas](https://github.com/99dimitris)
 
 [Buy me a beer](https://www.buymeacoffee.com/dmatsoukas)
 
