@@ -80,8 +80,8 @@ services:
       - npm_proxy_network
     volumes:
       - "${CONFIG_DIR}/radarr:/config"
-      - "${DOWNLOADS_DIR}/:/downloads"
-      - "${MEDIA_DIR}/:/media"
+      - "${DOWNLOADS_DIR}:/downloads"
+      - "${MEDIA_DIR}:/media"
     # links:
     #   - nzbhydra
     #   - nzbget
