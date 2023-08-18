@@ -1,82 +1,83 @@
 version: "3.7"
 
 services:
-  # plex:
-  #   ports:
-  #     - "32400:32400/tcp"
+  plex:
+    ports:
+      - "32400:32400/tcp"
   
-  # jellyfin:
-  #   ports:
-  #     - "8096:8096/tcp"
-  #     - "7359:7359/udp"
-
-  # nzbget:
-  #   ports:
-  #     - "6789:6789/tcp"
-
-  # sonarr:
-  #   ports:
-  #     - "8989:8989/tcp"
-
-  # radarr:
-  #   ports:
-  #     - "7878:7878/tcp"
-
-  # nzbhydra:
-  #   ports:
-  #     - "5076:5076/tcp"
-
-  # duplicati:
-  #   ports:
-  #     - "8200:8200/tcp"
-
-  # netdata:
-  #   ports:
-  #     - "19999:19999/tcp"
-
-  # prowlarr:
-  #   ports:
-  #     - "9696:9696/tcp"
-
-  # bazarr:
-  #   ports:
-  #     - "6767:6767/tcp"
-
-  # lidarr:
-  #   ports:
-  #     - "8686:8686/tcp"
-
-  # transmission:
-  #   ports:
-  #     - 9091:9091
-  #     - 51413:51413
-  #     - 51413:51413/udp
-
-  #navidrome:
-  #  ports:
-  #    - "4533:4533"
+  jellyfin:
+    ports:
+      - "8096:8096/tcp"
+      - "7359:7359/udp"
   
-  # homer:
-  #   ports:
-  #     - 8087:8080
-  
-  # overseerr:
-  #   ports:
-  #     - 5055:5055
+  overseerr:
+    ports:
+      - 5055:5055
 
-  # npm:
-  #   ports:
-  #     - '80:80/tcp'
-  #     - '8181:81/tcp'
-  #     - '443:443/tcp'
+  sonarr:
+    ports:
+      - "8989:8989/tcp"
 
-  # qbittorent:
-  #   ports:
-  #     - 8080:8080
-  #     - 6881:6881
-  #     - 6881:6881/udp
+  radarr:
+    ports:
+      - "7878:7878/tcp"
 
-  # homarr:
-  #   ports:
-  #     - '7575:7575'
+  bazarr:
+    ports:
+      - "6767:6767/tcp"
 
+  lidarr:
+    ports:
+      - "8686:8686/tcp"
+
+  prowlarr:
+    ports:
+      - "9696:9696/tcp"
+
+  qbittorent:
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+
+  jdownloader-2:
+    ports:
+      - "5800:5800"
+
+  nzbget:
+    ports:
+      - "6789:6789/tcp"
+
+  nzbhydra:
+    ports:
+      - "5076:5076/tcp"
+
+  navidrome:
+   ports:
+     - "4533:4533"
+
+  homarr:
+    ports:
+      - '7575:7575'
+
+  tautulli:
+    ports:
+      - 8181:8181
+
+  netdata:
+    ports:
+      - "19999:19999/tcp"
+
+  npm:
+    ports:
+      - '80:80/tcp'
+      - '8181:81/tcp'
+      - '443:443/tcp'
+
+  filebrowser:
+    ports:
+      - 8182:80
+
+  duplicati:
+    ports:
+      - "8200:8200/tcp"

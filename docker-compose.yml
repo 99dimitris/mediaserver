@@ -63,10 +63,10 @@ services:
       - "${CONFIG_DIR}/sonarr:/config"
       - "${DOWNLOADS_DIR}:/downloads"
       - "${MEDIA_DIR}:/media"
-    links:
-      - nzbhydra
-      - nzbget
-      - qbittorrent
+    # links:
+    #   - nzbhydra
+    #   - nzbget
+    #   - qbittorrent
   # https://docs.linuxserver.io/images/docker-radarr
   radarr:
     image: linuxserver/radarr:latest
@@ -82,10 +82,10 @@ services:
       - "${CONFIG_DIR}/radarr:/config"
       - "${DOWNLOADS_DIR}:/downloads"
       - "${MEDIA_DIR}:/media"
-    links:
-      - nzbhydra
-      - nzbget
-      - qbittorrent
+    # links:
+    #   - nzbhydra
+    #   - nzbget
+    #   - qbittorrent
   # https://hub.docker.com/r/linuxserver/bazarr
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
@@ -117,10 +117,10 @@ services:
       - "${DOWNLOADS_DIR}:/downloads"
     networks:
       - npm_proxy_network
-    links:
-      - nzbhydra
-      - nzbget
-      - qbittorrent
+    # links:
+    #   - nzbhydra
+    #   - nzbget
+    #   - qbittorrent
   # https://hub.docker.com/r/linuxserver/prowlarr
   prowlarr:
     image: linuxserver/prowlarr:0.2.0-develop
@@ -149,20 +149,22 @@ services:
     volumes:
       - "${CONFIG_DIR}/qbittorent:/config"
       - "${DOWNLOADS_DIR}:/downloads"
-  # https://github.com/ajnart/homarr/pkgs/container/homarr    
-  homarr:
-    container_name: homarr
-    image: ghcr.io/ajnart/homarr:latest
+  # https://hub.docker.com/r/jlesage/jdownloader-2
+  jdownloader-2:
+    image: jlesage/jdownloader-2
     restart: unless-stopped
+    container_name: jdownloader-2
     environment:
-      PUID: "${PUID}"
-      PGID: "${PGID}"
+      GROUP_ID: "${PGID}"
+      USER_ID: "${PUID}"
       TZ: "${TZ}"
     networks:
       - npm_proxy_network
+    ports:
+      - "5800:5800"
     volumes:
-      - "${CONFIG_DIR}/homarr/configs:/app/data/configs"
-      - "${CONFIG_DIR}/homarr/public/icons:/app/public/icons"
+      - "${CONFIG_DIR}/jdownloader-2:/config:rw"
+      - "${DOWNLOADS_DIR}/jd2:/output:rw"
   # https://docs.linuxserver.io/images/docker-nzbget
   nzbget:
     image: linuxserver/nzbget:latest
@@ -181,6 +183,7 @@ services:
   nzbhydra:
     image: linuxserver/nzbhydra2:latest
     restart: unless-stopped
+    container_name: nzbhydra
     environment:
       PUID: "${PUID}"
       PGID: "${PGID}"
@@ -190,19 +193,48 @@ services:
     volumes:
       - "${CONFIG_DIR}/nzbhydra:/config"
       - "${DOWNLOADS_DIR}:/downloads"
-  # https://docs.linuxserver.io/images/docker-duplicati
-  duplicati:
-    image: linuxserver/duplicati:latest
+  # https://github.com/ajnart/homarr/pkgs/container/homarr    
+  homarr:
+    image: ghcr.io/ajnart/homarr:latest
     restart: unless-stopped
+    container_name: homarr
     environment:
-      PUID: ${PUID}
-      PGID: ${PGID}
-      TZ: ${TZ}
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+    networks:
+      - npm_proxy_network
     volumes:
-      - ${CONFIG_DIR}/duplicati:/config:rw
-      - ./:/source:rw
-      - ${BACKUP_DIR}:/backupdir:rw
-      - ${CONFIG_DIR}:/allconf:ro
+      - "${CONFIG_DIR}/homarr/configs:/app/data/configs"
+      - "${CONFIG_DIR}/homarr/public/icons:/app/public/icons"
+  # https://hub.docker.com/r/deluan/navidrome
+  navidrome:
+    image: deluan/navidrome:latest
+    restart: unless-stopped
+    user: ${PUID}:${PGID}
+    container_name: navidrome
+    environment:
+      TZ: ${TZ}
+      ND_SCANSCHEDULE: "@every 1m"
+      ND_LOGLEVEL: debug  
+      ND_SESSIONTIMEOUT: 24h
+      ND_BASEURL: ""
+    volumes:
+      - "${CONFIG_DIR}/navidrome:/data"
+      - "${MEDIA_DIR}/Music:/music:ro"
+    networks:
+      - npm_proxy_network
+  # https://hub.docker.com/r/linuxserver/tautulli
+  tautulli:
+    image: lscr.io/linuxserver/tautulli:latest
+    restart: unless-stopped
+    container_name: tautulli
+    environment:
+      PUID: "${PUID}"
+      PGID: "${PGID}"
+      TZ: "${TZ}"
+    volumes:
+      - "${CONFIG_DIR}/tautulli:/config:rw"
     networks:
       - npm_proxy_network
   # https://hub.docker.com/r/netdata/netdata
@@ -210,6 +242,7 @@ services:
     image: netdata/netdata:latest
     restart: unless-stopped
     hostname: ${NETDATA_HOST}
+    container_name: netdata
     environment:
       PGID: ${DOCKER_PGID}
       TZ: ${TZ}
@@ -229,6 +262,7 @@ services:
   npm:
     image: jc21/nginx-proxy-manager:latest
     restart: unless-stopped
+    container_name: npm
     environment:
       PUID: ${PUID}
       PGID: ${PGID}
@@ -242,31 +276,34 @@ services:
       test: ["CMD", "/bin/check-health"]
       interval: 10s
       timeout: 3s
-  # https://hub.docker.com/r/deluan/navidrome
-  navidrome:
-    image: deluan/navidrome:latest
+  # https://hub.docker.com/r/filebrowser/filebrowser
+  filebrowser:
     restart: unless-stopped
-    user: ${PUID}:${PGID}
-    environment:
-      TZ: ${TZ}
-      ND_SCANSCHEDULE: "@every 1m"
-      ND_LOGLEVEL: debug  
-      ND_SESSIONTIMEOUT: 24h
-      ND_BASEURL: ""
-    volumes:
-      - "${CONFIG_DIR}/navidrome:/data"
-      - "${MEDIA_DIR}/Music:/music:ro"
-    networks:
-      - npm_proxy_network
-  # https://hub.docker.com/r/b4bz/homer
-  homer:
-    image: b4bz/homer:latest
-    restart: unless-stopped
-    volumes:
-      - "${CONFIG_DIR}/homer/assets/:/www/assets"
+    image: filebrowser/filebrowser:s6
+    container_name: filebrowser
     environment:
       PUID: ${PUID}
       PGID: ${PGID}
       TZ: ${TZ}
+    volumes:
+      - "${MEDIA_DIR}:/mediastack:rw"
+      - "${CONFIG_DIR}/filebrowser/settings.json:/config/settings.json"
     networks:
       - npm_proxy_network
+  # https://docs.linuxserver.io/images/docker-duplicati
+  duplicati:
+    image: linuxserver/duplicati:latest
+    restart: unless-stopped
+    container_name: duplicati
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+    volumes:
+      - ${CONFIG_DIR}/duplicati:/config:rw
+      - ./:/source:rw
+      - ${BACKUP_DIR}:/backupdir:rw
+      - ${CONFIG_DIR}:/allconf:ro
+    networks:
+      - npm_proxy_network
+  
